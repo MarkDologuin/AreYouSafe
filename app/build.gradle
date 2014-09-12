@@ -1,24 +1,40 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 20
-    buildToolsVersion "20.0.0"
-
+    signingConfigs {
+        config {
+            keyAlias 'AreYouSafe'
+            keyPassword 'safe123'
+            storeFile file('D:/Dropbox/keys/AreYouSafe.jks')
+            storePassword 'safe123'
+        }
+    }
+    compileSdkVersion 19
+    buildToolsVersion '19.1.0'
     defaultConfig {
         applicationId "application.areyousafe"
         minSdkVersion 19
-        targetSdkVersion 20
+        targetSdkVersion 19
         versionCode 1
         versionName "1.0"
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            signingConfig signingConfigs.config
+        }
+    }
+    productFlavors {
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //Google Play Services
+    compile 'com.android.support:appcompat-v7:20.+'
+    compile 'com.google.android.gms:play-services:5.0.89'
 }

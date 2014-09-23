@@ -3,16 +3,20 @@ package application.areyousafe;
 import android.app.Activity;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.MapFragment;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity
+         {
 
 
 

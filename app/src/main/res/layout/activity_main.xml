@@ -30,5 +30,6 @@
         android:text="Get My Location"
         android:layout_toEndOf="@id/MainButton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:enabled="true" />
 </RelativeLayout>

@@ -1,9 +1,8 @@
 package application.areyousafe;
 
-import android.app.Activity;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.app.Dialog;
+
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
@@ -13,63 +12,64 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.LatLng;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements LocationListener{
     private GoogleMap map;
-    private LocationManager lm;
-    private Location currentLocation;
-
+    public LocationManager lm;
+    Button GetMyLocationButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MapView view = (MapView) findViewById(R.id.mapFragment);
+        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());//If google play is available
 
-        map = view.getMap();
+        if(status != ConnectionResult.SUCCESS) // Google Play Services are not available
+        {
+            int requestCode = 10;
+            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, this, requestCode);
+            dialog.show();
+        }
+        else
+        {
+            map = ((MapFragment) getFragmentManager().findFragmentById(R.id.mapFragment)).getMap();
+            map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            map.setMyLocationEnabled(true);
+            lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        LocationListener listener = new LocationListener() {
+            if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+                Location lastLocation = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                if (lastLocation != null){
+                    onLocationChanged(lastLocation);
+                }
+                lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+            }
+        }
+
+        //set onClick Listener
+        GetMyLocationButton = (Button) findViewById(R.id.MainButton);
+
+        //BUTTON FUNCTION
+        GetMyLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onLocationChanged(Location location) {
-                currentLocation = location;
-                map.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
+            public void onClick(View v) {
 
             }
+        });
 
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        };
-
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,0, 0, listener);
-    
     }
 
-    /**
-    private void setMap() {
-        map = ( (MapFragment) getFragmentManager().findFragmentById(R.id.mapFragment)).getMap();
-        map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        LatLng currLoc = getCurrentLocation();
-        //map.animateCamera(CameraUpdateFactory.newLatLng(currLoc, 15));
-    }
-    **/
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -89,11 +89,31 @@ public class MainActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClickButton(){
-        //DOES NOTHING FOR NOW
+
+    @Override
+    public void onLocationChanged(Location location) {
+        LatLng lastLng = new LatLng(location.getLatitude(),location.getLongitude());
+
+        map.moveCamera(CameraUpdateFactory.newLatLng(lastLng));
+        map.animateCamera(CameraUpdateFactory.zoomTo(14));
+
+
     }
 
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
 
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 }
 
 

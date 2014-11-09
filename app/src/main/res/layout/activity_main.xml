@@ -19,7 +19,6 @@
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/MainButton"
         android:layout_alignParentTop="true" />
 
 
@@ -29,7 +28,18 @@
         android:layout_height="wrap_content"
         android:text="Get My Location"
         android:layout_toEndOf="@id/MainButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:enabled="true" />
+        android:enabled="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:layout_below="@+id/mapFragment"
+        android:layout_alignEnd="@id/MainButton"
+        android:digits="4"
+        android:editable="true" />
 </RelativeLayout>

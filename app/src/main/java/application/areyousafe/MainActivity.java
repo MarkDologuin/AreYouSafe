@@ -7,6 +7,7 @@ import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -37,22 +39,35 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.security.Key;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends FragmentActivity implements LocationListener{
     private GoogleMap map;
     public LocationManager lm;
     Button GetMyLocationButton;
+    public List<Incident> incidentList;
+    public Location currentLocation;
+
+
+    public TextView responseTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());//If google play is available
 
-        if(status != ConnectionResult.SUCCESS) // Google Play Services are not available
+
+        this.responseTextView = (TextView) this.findViewById(R.id.responseTextView);
+
+        //If google play is available
+        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
+
+        //Else Google Play Services are not available
+        if(status != ConnectionResult.SUCCESS)
         {
             int requestCode = 10;
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, this, requestCode);
@@ -70,6 +85,7 @@ public class MainActivity extends FragmentActivity implements LocationListener{
                 if (lastLocation != null){
                     onLocationChanged(lastLocation);
                 }
+
                 lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
             }
         }
@@ -84,74 +100,20 @@ public class MainActivity extends FragmentActivity implements LocationListener{
         GetMyLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                map.animateCamera(CameraUpdateFactory.zoomTo(18));
+                //map.animateCamera(CameraUpdateFactory.zoomTo(18));
+                new GetIncidentsTask().execute(new ApiConnector());
+
 
             }
         });
 
-        //Create HTTP
-        createHTTP();
 
 
     }//End of MAIN
 
-    public void createHTTP(){
-        Log.e("ENTERING", "createHTTP");
-        JSONArray jArray = null;
-        /*
-        String result = null;
-        StringBuilder sb = null;
-        InputStream is = null;
 
 
-        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-        //http post
-        try{
-            HttpClient httpclient = new DefaultHttpClient();
-
-            HttpPost httppost = new HttpPost("http://mgltr.root.sx/query.php");
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            HttpResponse response = httpclient.execute(httppost);
-            HttpEntity entity = response.getEntity();
-            is = entity.getContent();
-            Log.e ("log_tag_test", "hello" + entity.toString());
-        }catch(Exception e){
-            Log.e("log_tag", "Error in http connection"+e.toString());
-        }
-
-       //convert response to string
-        try{
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-            sb = new StringBuilder();
-            sb.append(reader.readLine() + "\n");
-
-            String line="0";
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-            is.close();
-            result=sb.toString();
-        }catch(Exception e){
-            Log.e("log_tag", "Error converting result "+e.toString());
-        }
-
-        String name;
-        try{
-            jArray = new JSONArray(result);
-            JSONObject json_data = null;
-            for(int i=0;i<jArray.length();i++){
-                json_data = jArray.getJSONObject(i);
-                String ct_name = json_data.getString("NAME");//here "Name" is the column name in database
-            }
-        }
-        catch(JSONException e1){
-            Toast.makeText(getBaseContext(), "No Data Found", Toast.LENGTH_LONG).show();
-        } catch (ParseException e1) {
-            e1.printStackTrace();
-        }
-        */
-    }
 
 
 
@@ -179,8 +141,9 @@ public class MainActivity extends FragmentActivity implements LocationListener{
     public void onLocationChanged(Location location) {
         LatLng lastLng = new LatLng(location.getLatitude(),location.getLongitude());
 
+        currentLocation = location;
         map.moveCamera(CameraUpdateFactory.newLatLng(lastLng));
-        map.animateCamera(CameraUpdateFactory.zoomTo(16));
+        map.animateCamera(CameraUpdateFactory.zoomTo(18));
 
 
     }
@@ -197,6 +160,56 @@ public class MainActivity extends FragmentActivity implements LocationListener{
 
     @Override
     public void onProviderDisabled(String provider) {
+
+    }
+
+    private class GetIncidentsTask extends AsyncTask<ApiConnector,Long, JSONArray>
+    {
+        @Override
+        protected JSONArray doInBackground(ApiConnector... params) {
+            //executed on Background thread
+            String longitude = String.valueOf( currentLocation.getLongitude());
+            String latitude = String.valueOf( currentLocation.getLatitude());
+
+            return params[0].getIncidents(longitude,latitude);
+        }
+
+        @Override
+        protected  void onPostExecute (JSONArray jsonArray){
+            responseTextView.setText("bob");
+        }
+
+    }
+
+
+    public void ParseResults(JSONArray results){
+
+        //makes a new array list
+        incidentList = new ArrayList<Incident>();
+
+        for(int i=0; i < results.length(); i++){
+            JSONObject json = null;
+            try {
+                json = results.getJSONObject(i);
+
+                incidentList.add(new Incident(json.getString("date"),
+                        json.getString("time"),
+                        json.getString("latitude"),
+                        json.getString("longitude"),
+                        json.getString("total_injured"),
+                        json.getString("total_killed"),
+                        json.getString("contrib_factor_1"),
+                        json.getString("contrib_factor_2")));
+
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        responseTextView.setText(incidentList.size());
 
     }
 }

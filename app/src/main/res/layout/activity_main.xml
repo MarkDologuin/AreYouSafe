@@ -15,11 +15,11 @@
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mapFragment"
         android:layout_width="fill_parent"
-        android:layout_height="200dp"
+        android:layout_height="400dp"
         android:name="com.google.android.gms.maps.MapFragment"
-        android:textAlignment="viewStart"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
 
     <Button
@@ -30,7 +30,27 @@
         android:layout_toEndOf="@id/MainButton"
         android:enabled="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:layout_below="@+id/mapFragment"
+        android:layout_alignEnd="@id/MainButton"
+        android:digits="4"
+        android:editable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="TEXT GOES HERE"
+        android:id="@+id/responseTextView"
+        android:layout_below="@+id/mapFragment"
         android:layout_alignParentStart="true"
-        android:typeface="normal"
-        android:background="@color/common_signin_btn_light_text_default" />
+        android:layout_alignEnd="@+id/mapFragment"
+        android:layout_above="@+id/MainButton" />
 </RelativeLayout>

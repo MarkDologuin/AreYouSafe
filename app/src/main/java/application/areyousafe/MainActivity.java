@@ -7,6 +7,7 @@ import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -14,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.gms.common.ConnectionResult;
@@ -21,20 +24,50 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.LatLng;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.security.Key;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends FragmentActivity implements LocationListener{
     private GoogleMap map;
     public LocationManager lm;
     Button GetMyLocationButton;
+    public List<Incident> incidentList;
+    public Location currentLocation;
+
+
+    public TextView responseTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());//If google play is available
 
-        if(status != ConnectionResult.SUCCESS) // Google Play Services are not available
+
+        this.responseTextView = (TextView) this.findViewById(R.id.responseTextView);
+
+        //If google play is available
+        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
+
+        //Else Google Play Services are not available
+        if(status != ConnectionResult.SUCCESS)
         {
             int requestCode = 10;
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, this, requestCode);
@@ -52,22 +85,35 @@ public class MainActivity extends FragmentActivity implements LocationListener{
                 if (lastLocation != null){
                     onLocationChanged(lastLocation);
                 }
+
                 lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
             }
         }
+
+
 
         //set onClick Listener
         GetMyLocationButton = (Button) findViewById(R.id.MainButton);
 
         //BUTTON FUNCTION
+
         GetMyLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //map.animateCamera(CameraUpdateFactory.zoomTo(18));
+                new GetIncidentsTask().execute(new ApiConnector());
+
 
             }
         });
 
-    }
+
+
+    }//End of MAIN
+
+
+
+
 
 
 
@@ -95,8 +141,9 @@ public class MainActivity extends FragmentActivity implements LocationListener{
     public void onLocationChanged(Location location) {
         LatLng lastLng = new LatLng(location.getLatitude(),location.getLongitude());
 
+        currentLocation = location;
         map.moveCamera(CameraUpdateFactory.newLatLng(lastLng));
-        map.animateCamera(CameraUpdateFactory.zoomTo(14));
+        map.animateCamera(CameraUpdateFactory.zoomTo(18));
 
 
     }
@@ -113,6 +160,56 @@ public class MainActivity extends FragmentActivity implements LocationListener{
 
     @Override
     public void onProviderDisabled(String provider) {
+
+    }
+
+    private class GetIncidentsTask extends AsyncTask<ApiConnector,Long, JSONArray>
+    {
+        @Override
+        protected JSONArray doInBackground(ApiConnector... params) {
+            //executed on Background thread
+            String longitude = String.valueOf( currentLocation.getLongitude());
+            String latitude = String.valueOf( currentLocation.getLatitude());
+
+            return params[0].getIncidents(longitude,latitude);
+        }
+
+        @Override
+        protected  void onPostExecute (JSONArray jsonArray){
+            responseTextView.setText("bob");
+        }
+
+    }
+
+
+    public void ParseResults(JSONArray results){
+
+        //makes a new array list
+        incidentList = new ArrayList<Incident>();
+
+        for(int i=0; i < results.length(); i++){
+            JSONObject json = null;
+            try {
+                json = results.getJSONObject(i);
+
+                incidentList.add(new Incident(json.getString("date"),
+                        json.getString("time"),
+                        json.getString("latitude"),
+                        json.getString("longitude"),
+                        json.getString("total_injured"),
+                        json.getString("total_killed"),
+                        json.getString("contrib_factor_1"),
+                        json.getString("contrib_factor_2")));
+
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        responseTextView.setText(incidentList.size());
 
     }
 }

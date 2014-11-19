@@ -15,7 +15,7 @@
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mapFragment"
         android:layout_width="fill_parent"
-        android:layout_height="400dp"
+        android:layout_height="250dp"
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
@@ -30,27 +30,45 @@
         android:layout_toEndOf="@id/MainButton"
         android:enabled="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="#ffffffff" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/mapFragment"
-        android:layout_alignEnd="@id/MainButton"
-        android:digits="4"
-        android:editable="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="TEXT GOES HERE"
-        android:id="@+id/responseTextView"
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_below="@+id/mapFragment"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/mapFragment"
-        android:layout_above="@+id/MainButton" />
+        android:layout_above="@+id/MainButton">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Status:"
+                android:id="@+id/text1"
+                android:layout_column="0"
+                android:background="#ffffffff" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Idle"
+                android:id="@+id/textView"
+                android:layout_column="0"
+                android:background="#ffffffff" />
+        </TableRow>
+    </TableLayout>
+
+
 </RelativeLayout>

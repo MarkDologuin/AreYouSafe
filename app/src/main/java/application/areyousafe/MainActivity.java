@@ -4,6 +4,7 @@ package application.areyousafe;
 import android.app.Dialog;
 
 import android.content.Context;
+import android.hardware.Camera;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -37,11 +38,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 
 public class MainActivity extends FragmentActivity implements LocationListener{
@@ -49,19 +52,20 @@ public class MainActivity extends FragmentActivity implements LocationListener{
     public LocationManager lm;
     Button GetMyLocationButton;
     public List<Incident> incidentList;
+    public Vector<Incident> incidentVector;
     public Location currentLocation;
 
 
     public TextView responseTextView;
-
+    public Button mainButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-
-        this.responseTextView = (TextView) this.findViewById(R.id.responseTextView);
+        mainButton = (Button) findViewById(R.id.MainButton);
+        this.responseTextView = (TextView) this.findViewById(R.id.textView);
 
         //If google play is available
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
@@ -102,7 +106,8 @@ public class MainActivity extends FragmentActivity implements LocationListener{
             public void onClick(View v) {
                 //map.animateCamera(CameraUpdateFactory.zoomTo(18));
                 new GetIncidentsTask().execute(new ApiConnector());
-
+                responseTextView.setText("Accessing database");
+                mainButton.setEnabled(false);
 
             }
         });
@@ -170,13 +175,20 @@ public class MainActivity extends FragmentActivity implements LocationListener{
             //executed on Background thread
             String longitude = String.valueOf( currentLocation.getLongitude());
             String latitude = String.valueOf( currentLocation.getLatitude());
+            //JSONArray data = null;
 
-            return params[0].getIncidents(longitude,latitude);
+            return params[0].getIncidents(longitude, latitude, responseTextView);
         }
 
         @Override
         protected  void onPostExecute (JSONArray jsonArray){
-            responseTextView.setText("bob");
+            Context context = getApplicationContext();
+            CharSequence text = "Parsing Results!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            //ParseResults(jsonArray);
         }
 
     }
@@ -184,32 +196,30 @@ public class MainActivity extends FragmentActivity implements LocationListener{
 
     public void ParseResults(JSONArray results){
 
+
         //makes a new array list
-        incidentList = new ArrayList<Incident>();
 
         for(int i=0; i < results.length(); i++){
             JSONObject json = null;
+            Incident temp = null;
             try {
                 json = results.getJSONObject(i);
-
-                incidentList.add(new Incident(json.getString("date"),
+                temp =  new Incident(json.getString("date"),
                         json.getString("time"),
                         json.getString("latitude"),
                         json.getString("longitude"),
                         json.getString("total_injured"),
                         json.getString("total_killed"),
                         json.getString("contrib_factor_1"),
-                        json.getString("contrib_factor_2")));
-
-
-
+                        json.getString("contrib_factor_2"));
+                incidentVector.add(temp);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
 
-        responseTextView.setText(incidentList.size());
+        responseTextView.setText(incidentVector.size());
 
     }
 }

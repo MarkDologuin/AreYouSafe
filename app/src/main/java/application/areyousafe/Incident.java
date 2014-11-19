@@ -16,7 +16,11 @@ public class Incident {
     public String contrib_factor_2;
 
 
-    //One and only constructor
+    //CONSTRUCTOR
+    //All strings taken in
+    //Strings to int for total injured and total killed
+    //contributing factor currently stored as string, might changed to
+    //enum type (30 enum).
     public Incident(
     String _date,
     String _time,

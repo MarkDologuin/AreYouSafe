@@ -50,12 +50,11 @@ public class ApiConnector {
 
             status.setText("Accessing:" + url);
 
-
-
-                DefaultHttpClient httpClient = new DefaultHttpClient();  // Default HttpClient
-                HttpGet httpGet = new HttpGet(url);
-
+            DefaultHttpClient httpClient = new DefaultHttpClient();  // Default HttpClient
+            HttpGet httpGet = new HttpGet(url);
             HttpResponse httpResponse = null;
+
+            //Execute http query
             try {
                 httpResponse = httpClient.execute(httpGet);
             } catch (IOException e) {
@@ -63,9 +62,14 @@ public class ApiConnector {
             }
             status.setText("HTTP Executed");
 
+
             if (httpResponse != null) {
                 HttpEntity entity = httpResponse.getEntity();
             }
+            else{
+                
+            }
+
 
             message = getStringFromInputStream(httpResponse.getEntity().getContent());
 

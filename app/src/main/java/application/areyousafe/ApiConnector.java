@@ -30,10 +30,12 @@ import static com.google.android.gms.internal.io.*;
  * https://www.youtube.com/watch?v=4Soj22OMc98
  */
 public class ApiConnector {
-        public JSONArray getIncidents(String x, String y, TextView status)
+
+    //TECHNICALY DO NOT NEED
+        public static JSONArray getIncidents(String x, String y, TextView status)
         {
 
-            BufferedReader in;
+
             String message ="";
             //y=latitude x=longitude
             // URL for getting all customers
@@ -66,16 +68,14 @@ public class ApiConnector {
             if (httpResponse != null) {
                 HttpEntity entity = httpResponse.getEntity();
             }
-            else{
-                
-            }
 
 
-            message = getStringFromInputStream(httpResponse.getEntity().getContent());
+
+            //message = getStringFromInputStream(httpResponse.getEntity().getContent());
 
 
-                //Log.e("BUFFERED READER", message );
-                status.setText(message);
+        //Log.e("BUFFERED READER", message );
+           status.setText(message);
 
             // Convert HttpEntity into JSON Array
             JSONArray jsonArray = null;
@@ -108,7 +108,7 @@ public class ApiConnector {
         }
 
 
-    private static String getStringFromInputStream(InputStream is) {
+    public static String getStringFromInputStream(InputStream is) {
 
         BufferedReader br = null;
         StringBuilder sb = new StringBuilder();

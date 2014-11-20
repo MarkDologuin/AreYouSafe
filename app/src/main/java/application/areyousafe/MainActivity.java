@@ -31,6 +31,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
@@ -106,7 +107,8 @@ public class MainActivity extends FragmentActivity implements LocationListener{
             public void onClick(View v) {
                 //map.animateCamera(CameraUpdateFactory.zoomTo(18));
                 new GetIncidentsTask().execute(new ApiConnector());
-                responseTextView.setText("Accessing database");
+
+
                 mainButton.setEnabled(false);
 
             }
@@ -115,31 +117,6 @@ public class MainActivity extends FragmentActivity implements LocationListener{
 
 
     }//End of MAIN
-
-
-
-
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 
     @Override
@@ -153,44 +130,107 @@ public class MainActivity extends FragmentActivity implements LocationListener{
 
     }
 
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
 
-    }
 
-    @Override
-    public void onProviderEnabled(String provider) {
 
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
-
-    private class GetIncidentsTask extends AsyncTask<ApiConnector,Long, JSONArray>
+    //APIConnector - passed to do in background
+    //Long - passed on to progressUpdate
+    //JSONArray is the result returned
+    private class GetIncidentsTask extends AsyncTask<ApiConnector,String, String>
     {
+        //Before entering the background thread
         @Override
-        protected JSONArray doInBackground(ApiConnector... params) {
-            //executed on Background thread
+        protected void onPreExecute() {
+
+        }
+
+        //Entering background thread
+        @Override
+        protected String doInBackground(ApiConnector... params) {
+
+            DefaultHttpClient httpClient = new DefaultHttpClient();  // Default HttpClient
+            HttpResponse httpResponse = null;
+
             String longitude = String.valueOf( currentLocation.getLongitude());
             String latitude = String.valueOf( currentLocation.getLatitude());
-            //JSONArray data = null;
+            String url = "http://mgltr.root.sx/query.php?";
+            //url += "x=";
+            //url += longitude;
+            //url += "&y=";
+            //url += latitude;
 
-            return params[0].getIncidents(longitude, latitude, responseTextView);
+            publishProgress("Accessing:" + url);
+            HttpGet httpGet = new HttpGet(url);
+
+
+            int numTries = 3;//number of attempts to execute the httpGet
+
+            while (true) {
+                try {
+                    httpResponse = httpClient.execute(httpGet);
+                    break;
+                } catch (Exception e ) {
+                    if (--numTries == 0) try {
+                        throw e;
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                        Log.e("HTTP Tries error ", e1.toString());
+                        publishProgress("Tried too many times.");
+                        return "TRIED TOO MANY TIMES HTTP PROBLEM";
+                    }
+                }
+            }
+
+            publishProgress("HTTP executed");
+            HttpEntity entity = null;
+            if (httpResponse != null) {
+                 entity = httpResponse.getEntity();
+            }
+            else{
+                publishProgress("Empty Entity");
+                return null;
+            }
+
+            publishProgress("Converting to string");
+
+            InputStream is = null;
+            try {
+                is = entity.getContent();
+            } catch (IOException e) {
+                e.printStackTrace();
+                publishProgress("Stream cannot be created");
+                return null;
+            }
+
+            String message = params[0].getStringFromInputStream(is);
+            publishProgress(message);
+            return message;
         }
+
+
+        //Update the progress on main thread
+        @Override
+        protected  void onProgressUpdate(String... incoming){
+            responseTextView.setText(incoming[0]);
+        }
+
 
         @Override
-        protected  void onPostExecute (JSONArray jsonArray){
-            Context context = getApplicationContext();
-            CharSequence text = "Parsing Results!";
-            int duration = Toast.LENGTH_SHORT;
+        protected  void onPostExecute (String jsonArray){
 
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            //ParseResults(jsonArray);
+            handleHTTPMessage(jsonArray);
         }
 
+
+
+
+    }
+
+    private void handleHTTPMessage(String message){
+        if(message.equals("ERROR")){
+            mainButton.setEnabled(false);
+            responseTextView.setText("ERROR IN SQL QUERY, TRY AGAIN");
+        }
     }
 
 
@@ -220,6 +260,41 @@ public class MainActivity extends FragmentActivity implements LocationListener{
         }
 
         responseTextView.setText(incidentVector.size());
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
 
     }
 }

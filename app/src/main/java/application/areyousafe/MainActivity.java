@@ -55,7 +55,7 @@ public class MainActivity extends FragmentActivity implements LocationListener{
     public List<Incident> incidentList;
     public Vector<Incident> incidentVector;
     public Location currentLocation;
-
+    public String killed, injured, factor1, factor2;
 
     public TextView responseTextView;
     public Button mainButton;
@@ -259,10 +259,21 @@ public class MainActivity extends FragmentActivity implements LocationListener{
 
             JSONObject obj = new JSONObject(message);
             Log.d("My App", obj.toString());
+            responseTextView.setText("PARSING: " + message);
 
+            killed = obj.getString("KILLED");
+            injured = obj.getString("INJURED");
+            factor1 = obj.getString("FACTOR1");
+            factor2 = obj.getString("FACTOR2");
+
+            responseTextView.setText(killed + " " + injured + " " + factor1 + " " + factor2);
 
         } catch (Throwable t) {
             Log.e("My App", "Could not parse malformed JSON: " + message)   ;
+            mainButton.setEnabled(true);
+
+            responseTextView.setText("THREW EXCEPTION");
+
         }
 
 

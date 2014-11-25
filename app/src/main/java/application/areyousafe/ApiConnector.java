@@ -108,6 +108,10 @@ public class ApiConnector {
         }
 
 
+    /*
+     * Returns the HTTP message from the stream.
+     */
+
     public static String getStringFromInputStream(InputStream is) {
 
         BufferedReader br = null;

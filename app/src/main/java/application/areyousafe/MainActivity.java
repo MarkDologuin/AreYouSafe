@@ -125,7 +125,7 @@ public class MainActivity extends FragmentActivity implements LocationListener{
 
         currentLocation = location;
         map.moveCamera(CameraUpdateFactory.newLatLng(lastLng));
-        map.animateCamera(CameraUpdateFactory.zoomTo(18));
+        map.animateCamera(CameraUpdateFactory.zoomTo(17));
 
 
     }
@@ -154,10 +154,10 @@ public class MainActivity extends FragmentActivity implements LocationListener{
             String longitude = String.valueOf( currentLocation.getLongitude());
             String latitude = String.valueOf( currentLocation.getLatitude());
             String url = "http://mgltr.root.sx/query.php?";
-            //url += "x=";
-            //url += longitude;
-            //url += "&y=";
-            //url += latitude;
+            url += "x=";
+            url += longitude;
+            url += "&y=";
+            url += latitude;
 
             publishProgress("Accessing:" + url);
             HttpGet httpGet = new HttpGet(url);
@@ -202,8 +202,10 @@ public class MainActivity extends FragmentActivity implements LocationListener{
                 return null;
             }
 
+
+            //CONVERT MESSAGE INTO STRING
             String message = params[0].getStringFromInputStream(is);
-            publishProgress(message);
+            //publishProgress(message);
             return message;
         }
 
@@ -216,9 +218,8 @@ public class MainActivity extends FragmentActivity implements LocationListener{
 
 
         @Override
-        protected  void onPostExecute (String jsonArray){
-
-            handleHTTPMessage(jsonArray);
+        protected  void onPostExecute (String stringMessage){
+            handleHTTPMessage(stringMessage);
         }
 
 
@@ -227,39 +228,50 @@ public class MainActivity extends FragmentActivity implements LocationListener{
     }
 
     private void handleHTTPMessage(String message){
-        if(message.equals("ERROR")){
-            mainButton.setEnabled(false);
+        if(message.equals("ERROR_Qpg_get_result")){
+            mainButton.setEnabled(true);
             responseTextView.setText("ERROR IN SQL QUERY, TRY AGAIN");
+        }
+        if(message.equals("ERROR_D")){
+            responseTextView.setText("Not enough data.");
+        }
+        if(message.length() == 0){
+            mainButton.setEnabled(true);
+            responseTextView.setText("ERROR MESSAGE = 0");
+        }
+        else{
+            //parse string into a JSON
+            responseTextView.setText("PARSING");
+            StringtoJSON(message);
+            //ParseResults(theArray);
         }
     }
 
 
-    public void ParseResults(JSONArray results){
+    //Takes the message and tokenizes it
+    private void StringtoJSON(String message){
+        // Convert HttpEntity into JSON Array
+
+        //responseTextView.setText("HTTP: "  + message);
 
 
-        //makes a new array list
+        try {
 
-        for(int i=0; i < results.length(); i++){
-            JSONObject json = null;
-            Incident temp = null;
-            try {
-                json = results.getJSONObject(i);
-                temp =  new Incident(json.getString("date"),
-                        json.getString("time"),
-                        json.getString("latitude"),
-                        json.getString("longitude"),
-                        json.getString("total_injured"),
-                        json.getString("total_killed"),
-                        json.getString("contrib_factor_1"),
-                        json.getString("contrib_factor_2"));
-                incidentVector.add(temp);
+            JSONObject obj = new JSONObject(message);
+            Log.d("My App", obj.toString());
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+
+        } catch (Throwable t) {
+            Log.e("My App", "Could not parse malformed JSON: " + message)   ;
         }
 
-        responseTextView.setText(incidentVector.size());
+
+
+   }
+
+
+    public void ParseResults(JSONArray results){
+        responseTextView.setText(results.toString());
 
     }
 

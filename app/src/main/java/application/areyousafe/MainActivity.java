@@ -424,7 +424,6 @@ public class MainActivity extends FragmentActivity implements LocationListener{
     public void ParseResults(JSONArray results){
         responseTextView.setText(results.toString());
 
-        //Comment
     }
 
 

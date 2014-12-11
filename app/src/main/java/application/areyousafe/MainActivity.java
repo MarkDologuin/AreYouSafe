@@ -1,6 +1,6 @@
 package application.areyousafe;
 
-
+//IMPORT LISTS
 import android.app.Dialog;
 
 import android.content.Context;

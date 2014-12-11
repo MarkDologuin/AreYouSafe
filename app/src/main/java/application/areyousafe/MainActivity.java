@@ -1,10 +1,11 @@
 package application.areyousafe;
 
-//IMPORT LISTS
+
 import android.app.Dialog;
 
 import android.content.Context;
-import android.hardware.Camera;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,11 +39,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,18 +56,57 @@ public class MainActivity extends FragmentActivity implements LocationListener{
     private GoogleMap map;
     public LocationManager lm;
     Button GetMyLocationButton;
+    Button lb;
+    Button mb;
+    Button db;
+    int fatalities, injuries;
     public List<Incident> incidentList;
     public Vector<Incident> incidentVector;
     public Location currentLocation;
     public String killed, injured, factor1, factor2;
-
     public TextView responseTextView;
+    public TextView stat;
+    public TextView fact;
+    public TextView statData;
+    public TextView factData;
     public Button mainButton;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Change Background on Click
+        final RelativeLayout layout = (RelativeLayout) findViewById(R.id.rl);
+        layout.setBackgroundColor(Color.rgb(121,104,120));
+        TextView title = (TextView) findViewById(R.id.title);
+        title.setTextColor(Color.rgb(121,104,120));
+
+        //42, 165, 160 [teal] | 170, 240, 209 [light green]
+
+        /*final Button lb = (Button) findViewById(R.id.light_blue);
+        lb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layout.setBackgroundColor(Color.rgb(212,240,255));
+            }
+        });
+        final Button mb = (Button) findViewById(R.id.medium_blue);
+        mb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layout.setBackgroundColor(Color.rgb(156,196,228));
+            }
+        });
+        final Button db = (Button) findViewById(R.id.dark_blue);
+        db.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layout.setBackgroundColor(Color.rgb(27,50,95));
+            }
+        });*/
 
         mainButton = (Button) findViewById(R.id.MainButton);
         this.responseTextView = (TextView) this.findViewById(R.id.textView);
@@ -96,9 +139,13 @@ public class MainActivity extends FragmentActivity implements LocationListener{
         }
 
 
-
         //set onClick Listener
         GetMyLocationButton = (Button) findViewById(R.id.MainButton);
+
+        //Typeface font = Typeface.createFromAsset(getAssets(), "fonts/feijoa.otf");
+        GetMyLocationButton.setText("Get My Location");
+        //GetMyLocationButton.setTypeface(font);
+
 
         //BUTTON FUNCTION
 
@@ -107,8 +154,6 @@ public class MainActivity extends FragmentActivity implements LocationListener{
             public void onClick(View v) {
                 //map.animateCamera(CameraUpdateFactory.zoomTo(18));
                 new GetIncidentsTask().execute(new ApiConnector());
-
-
                 mainButton.setEnabled(false);
 
             }
@@ -117,6 +162,9 @@ public class MainActivity extends FragmentActivity implements LocationListener{
 
 
     }//End of MAIN
+
+
+
 
 
     @Override
@@ -159,7 +207,7 @@ public class MainActivity extends FragmentActivity implements LocationListener{
             url += "&y=";
             url += latitude;
 
-            publishProgress("Accessing:" + url);
+            publishProgress("Accessing Database...");
             HttpGet httpGet = new HttpGet(url);
 
 
@@ -184,7 +232,7 @@ public class MainActivity extends FragmentActivity implements LocationListener{
             publishProgress("HTTP executed");
             HttpEntity entity = null;
             if (httpResponse != null) {
-                 entity = httpResponse.getEntity();
+                entity = httpResponse.getEntity();
             }
             else{
                 publishProgress("Empty Entity");
@@ -249,12 +297,68 @@ public class MainActivity extends FragmentActivity implements LocationListener{
 
 
     //Takes the message and tokenizes it
-    private void StringtoJSON(String message){
+   /* private void StringtoJSON(String message){
         // Convert HttpEntity into JSON Array
 
         //responseTextView.setText("HTTP: "  + message);
 
 
+        try {
+
+            JSONObject obj = new JSONObject(message);
+            Log.d("My App", obj.toString());
+            Typeface font = Typeface.createFromAsset(getAssets(), "fonts/feijoa.otf");
+            responseTextView.setTypeface(font);
+            responseTextView.setText("PARSING: " + message);
+
+            killed = obj.getString("KILLED");
+            injured = obj.getString("INJURED");
+            factor1 = obj.getString("FACTOR1");
+            factor2 = obj.getString("FACTOR2");
+
+            responseTextView.setText(killed + " " + injured + " " + factor1 + " " + factor2);
+
+            if ((killed!="NULL" && injured!="NULL") || (killed!="" && injured!="") ) {
+                final RelativeLayout layout = (RelativeLayout) findViewById(R.id.rl);
+                //Not sure which is right
+                fatalities=Integer.parseInt(killed);
+                injuries=Integer.parseInt(injured);
+                //Change background here!
+                if (fatalities==0 && injuries<=5) {
+                    responseTextView.setText("Safe");
+                    layout.setBackgroundColor(Color.rgb(212,240,255));
+                }
+                else if (fatalities<=2 && injuries<=10 ){
+                    responseTextView.setText("Passable");
+
+                    layout.setBackgroundColor(Color.rgb(156,196,228));
+
+                }
+                else {
+                    responseTextView.setText("Unsafe");
+                    layout.setBackgroundColor(Color.rgb(27,50,95));
+                }
+
+            }
+
+        } catch (Throwable t) {
+            Log.e("My App", "Could not parse malformed JSON: " + message)   ;
+            Typeface font = Typeface.createFromAsset(getAssets(), "fonts/feijoa.otf");
+            responseTextView.setTypeface(font);
+            mainButton.setEnabled(true);
+            responseTextView.setText("THREW EXCEPTION");
+
+        }
+
+
+
+    }*/
+    private void StringtoJSON(String message){
+        // Convert HttpEntity into JSON Array
+
+        //responseTextView.setText("HTTP: "  + message);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/feijoa.otf");
+        responseTextView.setTypeface(font);
         try {
 
             JSONObject obj = new JSONObject(message);
@@ -266,19 +370,57 @@ public class MainActivity extends FragmentActivity implements LocationListener{
             factor1 = obj.getString("FACTOR1");
             factor2 = obj.getString("FACTOR2");
 
-            responseTextView.setText(killed + " " + injured + " " + factor1 + " " + factor2);
+            if (!killed.equals("null") && !injured.equals("null") ) {
+                fatalities=Integer.parseInt(killed);
+                injuries=Integer.parseInt(injured);
+                fact = (TextView) findViewById(R.id.fact);
+                statData = (TextView)findViewById(R.id.statData);
+                factData = (TextView) findViewById(R.id.factData);
+                fact.setTypeface(font);
+                factData.setTypeface(font);
+                statData.setTypeface(font);
+                responseTextView.setText("Statistics");
+                fact.setText("Contributing Factors ");
+                factData.setText( factor1 + " \n" + factor2);
+                statData.setText("Killed: " + killed + " \n" + "Injured: " + injured);
+                fatalities = Integer.parseInt(killed);
+                injuries = Integer.parseInt(injured);
+                final RelativeLayout layout = (RelativeLayout) findViewById(R.id.rl);
+                TextView title = (TextView) findViewById(R.id.title);
+                fatalities = Integer.parseInt(killed);
+                injuries = Integer.parseInt(injured);
+                //Change background here!
+                if (fatalities==0 && injuries <= 250) {
+                    title.setText("Safe");
+                    layout.setBackgroundColor(Color.rgb(177, 228, 255));
+                    title.setTextColor(Color.rgb(148, 187, 208));
+                }
+                else if (fatalities==0 && injuries>250 && injuries <=750) {
+                    title.setText("Passable");
+                    layout.setBackgroundColor(Color.rgb(156, 196, 228));
+                    title.setTextColor(Color.rgb(131, 181, 221));
+                }
+                else if (fatalities!=0)  {
+                    title.setText("Unsafe");
+                    layout.setBackgroundColor(Color.rgb(27, 50, 95));
+                    title.setTextColor(Color.rgb(27,50,105));
+                }
+                //else you leave the purple background since safety is unknown
+            }
 
         } catch (Throwable t) {
             Log.e("My App", "Could not parse malformed JSON: " + message)   ;
             mainButton.setEnabled(true);
 
-            responseTextView.setText("THREW EXCEPTION");
+            responseTextView.setText("Couldn't Access Database");
+            mainButton.setEnabled(true);
+
 
         }
 
 
 
-   }
+    }
 
 
     public void ParseResults(JSONArray results){
@@ -321,5 +463,3 @@ public class MainActivity extends FragmentActivity implements LocationListener{
 
     }
 }
-
-

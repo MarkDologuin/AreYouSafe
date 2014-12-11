@@ -1868,9 +1868,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.16"
-     inkscape:cx="-145.85448"
-     inkscape:cy="578.60709"
+     inkscape:zoom="0.22627417"
+     inkscape:cx="-506.51296"
+     inkscape:cy="646.4643"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -2231,213 +2231,13 @@
            style="fill:#8b0000;fill-opacity:1" />
       </g>
     </g>
-    <g
-       style="fill:#febe40;fill-opacity:1"
-       id="g3500"
-       transform="translate(-696.74869,146.1925)"
-       clip-path="url(#clipPath4835)"
-       inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
-      <g
-         style="fill:#febe40;fill-opacity:1"
-         transform="translate(-21.279916,1574.0635)"
-         id="g3502">
-        <rect
-           style="fill:#e9f2f9;fill-opacity:1"
-           id="rect3504"
-           height="960"
-           x="191.10245"
-           y="-2086.0908"
-           width="540"
-           inkscape:export-xdpi="90"
-           inkscape:export-ydpi="90"
-           inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/rect2997.png" />
-      </g>
-    </g>
-    <rect
-       clip-path="url(#clipPath4827)"
-       style="fill:#9cc4e4;fill-opacity:1"
-       id="rect3307"
-       height="348.76099"
-       x="-265.93503"
-       y="511.46628"
-       transform="matrix(0.70937768,-0.70482856,0.54390294,0.83914814,-598.23215,16.189689)"
-       ry="0"
-       width="1000"
-       inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
-       style="fill:#9cc4e4;fill-opacity:1"
-       id="rect3313"
-       height="348.76099"
-       x="-1063.605"
-       y="1688.9204"
-       transform="matrix(0.70937768,0.70482856,0.54390294,-0.83914814,-718.19174,1720.7725)"
-       ry="0"
-       width="1000"
-       clip-path="url(#clipPath4819)"
-       inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
-       clip-path="url(#clipPath4811)"
-       width="1000"
-       ry="0"
-       transform="matrix(0.70937768,0.70482856,0.54390294,-0.83914814,-717.53316,1720.0715)"
-       y="984.25653"
-       x="-934.9455"
-       height="348.76099"
-       id="rect3311"
-       style="fill:#e9f2f9;fill-opacity:1"
-       inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
-       clip-path="url(#clipPath4803)"
-       width="1028.2036"
-       ry="0"
-       transform="matrix(0.71357273,-0.70058116,0.54847915,0.83616423,0,0)"
-       y="-366.60782"
-       x="-766.75696"
-       height="464.4978"
-       id="rect3315"
-       style="fill:#1b325f;fill-opacity:1"
-       inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
-       style="fill:#9cc4e4;fill-opacity:1"
-       id="rect3337"
-       width="184"
-       height="75"
-       x="205.34174"
-       y="-594.6817"
-       transform="matrix(1,0,0,-1,-554.86675,0)"
-       clip-path="url(#clipPath4795)"
-       inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <text
-       sodipodi:linespacing="125%"
-       id="text3339"
-       y="573.38171"
-       x="217.36768"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans"
-       xml:space="preserve"
-       clip-path="url(#clipPath4787)"
-       transform="translate(-554.86675,0)"
-       inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
-         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Feijoa;-inkscape-font-specification:Feijoa Medium"
-         y="573.38171"
-         x="217.36768"
-         id="tspan3341"
-         sodipodi:role="line">Passable</tspan></text>
-    <rect
-       transform="matrix(1,0,0,-1,-554.86675,0)"
-       y="-594.6817"
-       x="27.777391"
-       height="75"
-       width="178"
-       id="rect3345"
-       style="fill:#e9f2f9;fill-opacity:1"
-       clip-path="url(#clipPath4779)"
-       inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="77.838013"
-       y="573.40167"
-       id="text3347"
-       sodipodi:linespacing="125%"
-       clip-path="url(#clipPath4771)"
-       transform="translate(-554.86675,0)"
-       inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
-         sodipodi:role="line"
-         id="tspan3349"
-         x="77.838013"
-         y="573.40167"
-         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;fill:#000000;font-family:Feijoa;-inkscape-font-specification:Feijoa Medium">Safe</tspan></text>
-    <rect
-       transform="matrix(1,0,0,-1,-554.86675,0)"
-       y="-594.6817"
-       x="389.77747"
-       height="75"
-       width="178"
-       id="rect3353"
-       style="fill:#1b325f;fill-opacity:1"
-       clip-path="url(#clipPath4763)"
-       inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <text
-       sodipodi:linespacing="125%"
-       id="text3355"
-       y="573.40167"
-       x="412.99994"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
-       xml:space="preserve"
-       clip-path="url(#clipPath4755)"
-       transform="translate(-554.86675,0)"
-       inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
-         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;fill:#ffffff;font-family:Feijoa;-inkscape-font-specification:Feijoa Medium"
-         y="573.40167"
-         x="412.99994"
-         id="tspan3357"
-         sodipodi:role="line">Unsafe</tspan></text>
-    <g
-       id="g4300"
-       transform="matrix(0.88455326,0,0,0.79867574,-531.85586,118.57906)"
-       style="fill:#ffffff;fill-opacity:1"
-       clip-path="url(#clipPath4747)"
-       inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
-      <flowRoot
-         xml:space="preserve"
-         id="flowRoot3319"
-         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
-         transform="translate(413.00214,-398.01845)"
-         clip-path="none"><flowRegion
-           id="flowRegion3321"><rect
-             id="rect3323"
-             width="193.74725"
-             height="106.06602"
-             x="-22.627417"
-             y="379.19653"
-             style="fill:#ffffff;fill-opacity:1" /></flowRegion><flowPara
-           id="flowPara3325"
-           style="font-size:90px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;fill:#ffffff;fill-opacity:1;font-family:Feijoa;-inkscape-font-specification:Feijoa Medium">afe</flowPara></flowRoot>      <flowRoot
-         xml:space="preserve"
-         id="flowRoot3327"
-         style="font-size:550px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
-         transform="matrix(-1.8847474,0,0,1,634.24152,-244.37025)"
-         clip-path="none"><flowRegion
-           id="flowRegion3329"><rect
-             id="rect3331"
-             width="726.90576"
-             height="670.33722"
-             x="66.46804"
-             y="-70.523384"
-             style="font-size:550px;fill:#ffffff;fill-opacity:1;stroke:none" /></flowRegion><flowPara
-           id="flowPara3333"
-           style="font-size:550px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Feijoa;-inkscape-font-specification:Feijoa Medium">?</flowPara></flowRoot>    </g>
     <rect
        style="fill:#e9f2f9;fill-opacity:1;stroke:none"
        id="rect4222"
        width="650"
        height="600"
-       x="-1085.7496"
-       y="-1023.0812"
+       x="-1536.5303"
+       y="-1431.8773"
        inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/110.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -2447,7 +2247,7 @@
        inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/110.png"
        clip-path="url(#clipPath4747)"
        style="fill:#000000;fill-opacity:1"
-       transform="matrix(1.0570507,0,0,0.95442615,-1089.2936,-717.80654)"
+       transform="matrix(1.0570507,0,0,0.95442615,174.65977,1270.9313)"
        id="g4224">
       <flowRoot
          clip-path="none"
@@ -2743,6 +2543,232 @@
              x="412.99994"
              y="573.40167"
              style="font-size:40px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;fill:#ffffff;font-family:Feijoa;-inkscape-font-specification:Feijoa Medium">Unsafe</tspan></text>
+      </g>
+    </g>
+    <g
+       id="g3584"
+       inkscape:export-filename="/Users/anahigarnelo/Desktop/edited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <g
+         transform="translate(-15.296593,95.987877)"
+         id="g3566">
+        <g
+           style="fill:#febe40;fill-opacity:1"
+           id="g3500"
+           transform="translate(-696.74869,146.1925)"
+           clip-path="url(#clipPath4835)"
+           inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90">
+          <g
+             style="fill:#febe40;fill-opacity:1"
+             transform="translate(-21.279916,1574.0635)"
+             id="g3502">
+            <rect
+               style="fill:#e9f2f9;fill-opacity:1"
+               id="rect3504"
+               height="960"
+               x="191.10245"
+               y="-2086.0908"
+               width="540"
+               inkscape:export-xdpi="90"
+               inkscape:export-ydpi="90"
+               inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/rect2997.png" />
+          </g>
+        </g>
+        <rect
+           clip-path="url(#clipPath4827)"
+           style="fill:#9cc4e4;fill-opacity:1"
+           id="rect3307"
+           height="348.76099"
+           x="-265.93503"
+           y="511.46628"
+           transform="matrix(0.70937768,-0.70482856,0.54390294,0.83914814,-598.23215,16.189689)"
+           ry="0"
+           width="1000"
+           inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+        <rect
+           style="fill:#9cc4e4;fill-opacity:1"
+           id="rect3313"
+           height="348.76099"
+           x="-1063.605"
+           y="1688.9204"
+           transform="matrix(0.70937768,0.70482856,0.54390294,-0.83914814,-718.19174,1720.7725)"
+           ry="0"
+           width="1000"
+           clip-path="url(#clipPath4819)"
+           inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+        <rect
+           clip-path="url(#clipPath4811)"
+           width="1000"
+           ry="0"
+           transform="matrix(0.70937768,0.70482856,0.54390294,-0.83914814,-717.53316,1720.0715)"
+           y="984.25653"
+           x="-934.9455"
+           height="348.76099"
+           id="rect3311"
+           style="fill:#e9f2f9;fill-opacity:1"
+           inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+        <rect
+           clip-path="url(#clipPath4803)"
+           width="1028.2036"
+           ry="0"
+           transform="matrix(0.71357273,-0.70058116,0.54847915,0.83616423,0,0)"
+           y="-366.60782"
+           x="-766.75696"
+           height="464.4978"
+           id="rect3315"
+           style="fill:#1b325f;fill-opacity:1"
+           inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+        <g
+           id="g4300"
+           transform="matrix(0.88455326,0,0,0.79867574,-531.85586,118.57906)"
+           style="fill:#ffffff;fill-opacity:1"
+           clip-path="url(#clipPath4747)"
+           inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90">
+          <flowRoot
+             xml:space="preserve"
+             id="flowRoot3319"
+             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
+             transform="translate(413.00214,-398.01845)"
+             clip-path="none"><flowRegion
+               id="flowRegion3321"><rect
+                 id="rect3323"
+                 width="193.74725"
+                 height="106.06602"
+                 x="-22.627417"
+                 y="379.19653"
+                 style="fill:#ffffff;fill-opacity:1" /></flowRegion><flowPara
+               id="flowPara3325"
+               style="font-size:90px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;fill:#ffffff;fill-opacity:1;font-family:Feijoa;-inkscape-font-specification:Feijoa Medium">afe</flowPara></flowRoot>          <flowRoot
+             xml:space="preserve"
+             id="flowRoot3327"
+             style="font-size:550px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
+             transform="matrix(-1.8847474,0,0,1,634.24152,-244.37025)"
+             clip-path="none"><flowRegion
+               id="flowRegion3329"><rect
+                 id="rect3331"
+                 width="726.90576"
+                 height="670.33722"
+                 x="66.46804"
+                 y="-70.523384"
+                 style="font-size:550px;fill:#ffffff;fill-opacity:1;stroke:none" /></flowRegion><flowPara
+               id="flowPara3333"
+               style="font-size:550px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Feijoa;-inkscape-font-specification:Feijoa Medium">?</flowPara></flowRoot>        </g>
+      </g>
+      <g
+         transform="translate(16.19711,0)"
+         id="g3537">
+        <g
+           id="g3527"
+           transform="translate(-4,0)">
+          <rect
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
+             clip-path="url(#clipPath4795)"
+             transform="matrix(1,0,0,-0.67128981,-582.21952,291.29603)"
+             y="-594.6817"
+             x="205.34174"
+             height="75"
+             width="184"
+             id="rect3337"
+             style="fill:#9cc4e4;fill-opacity:1" />
+          <text
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
+             transform="translate(-582.21952,107.97134)"
+             clip-path="url(#clipPath4787)"
+             xml:space="preserve"
+             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans"
+             x="217.36768"
+             y="573.38171"
+             id="text3339"
+             sodipodi:linespacing="125%"><tspan
+               sodipodi:role="line"
+               id="tspan3341"
+               x="217.36768"
+               y="573.38171"
+               style="font-size:40px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Feijoa;-inkscape-font-specification:Feijoa Medium">Passable</tspan></text>
+        </g>
+        <g
+           id="g3522"
+           transform="translate(0,0.01002)">
+          <rect
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
+             clip-path="url(#clipPath4763)"
+             style="fill:#1b325f;fill-opacity:1"
+             id="rect3353"
+             width="178"
+             height="75"
+             x="389.77747"
+             y="-594.6817"
+             transform="matrix(1,0,0,-0.67128981,-587.09782,291.28601)" />
+          <text
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
+             transform="translate(-587.09779,107.96136)"
+             clip-path="url(#clipPath4755)"
+             xml:space="preserve"
+             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
+             x="412.99994"
+             y="573.40167"
+             id="text3355"
+             sodipodi:linespacing="125%"><tspan
+               sodipodi:role="line"
+               id="tspan3357"
+               x="412.99994"
+               y="573.40167"
+               style="font-size:40px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;fill:#ffffff;font-family:Feijoa;-inkscape-font-specification:Feijoa Medium">Unsafe</tspan></text>
+        </g>
+        <g
+           id="g3532"
+           transform="translate(26.859223,-70.28406)">
+          <rect
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
+             clip-path="url(#clipPath4779)"
+             style="fill:#e9f2f9;fill-opacity:1"
+             id="rect3345"
+             width="178"
+             height="75"
+             x="27.777391"
+             y="-594.6817"
+             transform="matrix(1,0,0,-0.67128981,-612.31917,361.58009)" />
+          <text
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="/Users/anahigarnelo/Documents/School/CSCI 395/g4356.png"
+             transform="translate(-612.23757,178.25544)"
+             clip-path="url(#clipPath4771)"
+             sodipodi:linespacing="125%"
+             id="text3347"
+             y="573.40167"
+             x="77.838013"
+             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               style="font-size:40px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;fill:#000000;font-family:Feijoa;-inkscape-font-specification:Feijoa Medium"
+               y="573.40167"
+               x="77.838013"
+               id="tspan3349"
+               sodipodi:role="line">Safe</tspan></text>
+        </g>
       </g>
     </g>
   </g>

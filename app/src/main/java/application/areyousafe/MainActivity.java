@@ -142,9 +142,9 @@ public class MainActivity extends FragmentActivity implements LocationListener{
         //set onClick Listener
         GetMyLocationButton = (Button) findViewById(R.id.MainButton);
 
-        //Typeface font = Typeface.createFromAsset(getAssets(), "fonts/feijoa.otf");
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/feijoa.otf");
         GetMyLocationButton.setText("Get My Location");
-        //GetMyLocationButton.setTypeface(font);
+        GetMyLocationButton.setTypeface(font);
 
 
         //BUTTON FUNCTION
